@@ -44,11 +44,11 @@ require (
 	github.com/vishvananda/netns v0.0.4
 	go.uber.org/zap v1.27.0
 	go4.org/netipx v0.0.0-20231129151722-fdeea329fbba
-	golang.org/x/crypto v0.33.0
+	golang.org/x/crypto v0.36.0
 	golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8
 	golang.org/x/mod v0.23.0
-	golang.org/x/net v0.35.0
-	golang.org/x/sys v0.30.0
+	golang.org/x/net v0.38.0
+	golang.org/x/sys v0.31.0
 	golang.zx2c4.com/wireguard/wgctrl v0.0.0-20241231184526-a9ab2273dd10
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.5
@@ -88,7 +88,7 @@ require (
 	github.com/google/nftables v0.2.1-0.20240414091927-5e242ec57806 // indirect
 	github.com/google/pprof v0.0.0-20240424215950-a892ee059fd6 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/gorilla/csrf v1.7.3-0.20250123201450-9dd6af1f6d30 // indirect
+	github.com/gorilla/csrf v1.7.3 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/hashicorp/yamux v0.1.2 // indirect
 	github.com/hdevalence/ed25519consensus v0.2.0 // indirect
@@ -128,9 +128,9 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap/exp v0.3.0 // indirect
 	go4.org/mem v0.0.0-20240501181205-ae6ca9944745 // indirect
-	golang.org/x/sync v0.11.0 // indirect
-	golang.org/x/term v0.29.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/sync v0.12.0 // indirect
+	golang.org/x/term v0.30.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
 	golang.org/x/time v0.9.0 // indirect
 	golang.org/x/tools v0.29.0 // indirect
 	golang.zx2c4.com/wintun v0.0.0-20230126152724-0fa3db229ce2 // indirect
