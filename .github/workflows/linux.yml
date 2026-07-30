@@ -19,11 +19,11 @@ jobs:
       version: ${{ steps.outputs.outputs.version }}
     steps:
       - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ^1.24.6
       - name: Check input version
@@ -60,11 +60,11 @@ jobs:
           - { os: linux, arch: loong64, debian: loongarch64, rpm: loongarch64 }
     steps:
       - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ^1.24.6
       - name: Setup Android NDK
@@ -154,7 +154,7 @@ jobs:
       - name: Cleanup
         run: rm dist/sing-box
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: binary-${{ matrix.os }}_${{ matrix.arch }}${{ matrix.goarm && format('v{0}', matrix.goarm) }}${{ matrix.legacy_go && '-legacy' || '' }}
           path: "dist"
@@ -166,7 +166,7 @@ jobs:
       - build
     steps:
       - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
       - name: Set tag
@@ -175,7 +175,7 @@ jobs:
           git tag v${{ needs.calculate_version.outputs.version }} -f
           echo "VERSION=${{ needs.calculate_version.outputs.version }}" >> "$GITHUB_ENV"
       - name: Download builds
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: dist
           merge-multiple: true

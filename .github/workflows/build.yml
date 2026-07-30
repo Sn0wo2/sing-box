@@ -40,11 +40,11 @@ jobs:
       version: ${{ steps.outputs.outputs.version }}
     steps:
       - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ^1.24.6
       - name: Check input version
@@ -102,18 +102,18 @@ jobs:
           - { os: android, arch: "386", ndk: "i686-linux-android21" }
     steps:
       - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
       - name: Setup Go
         if: ${{ ! matrix.legacy_go }}
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ^1.24.6
       - name: Cache Legacy Go
         if: matrix.require_legacy_go
         id: cache-legacy-go
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/go/go_legacy
@@ -275,7 +275,7 @@ jobs:
       - name: Cleanup
         run: rm dist/sing-box
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: binary-${{ matrix.os }}_${{ matrix.arch }}${{ matrix.goarm && format('v{0}', matrix.goarm) }}${{ matrix.go386 && format('_{0}', matrix.go386) }}${{ matrix.gomips && format('_{0}', matrix.gomips) }}${{ matrix.legacy_go && '-legacy' || '' }}
           path: "dist"
@@ -287,12 +287,12 @@ jobs:
       - calculate_version
     steps:
       - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
           submodules: 'recursive'
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ^1.24.6
       - name: Setup Android NDK
@@ -327,7 +327,7 @@ jobs:
           cd clients/android
           git checkout dev
       - name: Gradle cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.gradle
           key: gradle-${{ hashFiles('**/*.gradle') }}
@@ -355,7 +355,7 @@ jobs:
           cp clients/android/app/build/outputs/apk/play/release/*.apk dist
           cp clients/android/app/build/outputs/apk/other/release/*-universal.apk dist
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: binary-android-apks
           path: 'dist'
@@ -367,12 +367,12 @@ jobs:
       - calculate_version
     steps:
       - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
           submodules: 'recursive'
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ^1.24.6
       - name: Setup Android NDK
@@ -407,7 +407,7 @@ jobs:
           cd clients/android
           git checkout dev
       - name: Gradle cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.gradle
           key: gradle-${{ hashFiles('**/*.gradle') }}
@@ -426,7 +426,7 @@ jobs:
           SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_CREDENTIALS }}
   build_apple:
     name: Build Apple clients
-    runs-on: macos-15
+    runs-on: macos-26
     needs:
       - calculate_version
     strategy:
@@ -464,13 +464,13 @@ jobs:
     steps:
       - name: Checkout
         if: matrix.if
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
           submodules: 'recursive'
       - name: Setup Go
         if: matrix.if
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ^1.24.6
       - name: Setup Xcode stable
@@ -609,7 +609,7 @@ jobs:
           cp "clients/apple/${{ matrix.archive }}/SFM.dSYMs.zip" "dist/SFM-${VERSION}-universal.dSYMs.zip"
       - name: Upload image
         if: matrix.if && matrix.name == 'macOS-standalone' && github.event_name == 'workflow_dispatch'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: binary-macos-dmg
           path: 'dist'
@@ -624,11 +624,11 @@ jobs:
       - build_apple
     steps:
       - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
       - name: Cache ghr
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         id: cache-ghr
         with:
           path: |
@@ -647,7 +647,7 @@ jobs:
           git tag v${{ needs.calculate_version.outputs.version }} -f
           echo "VERSION=${{ needs.calculate_version.outputs.version }}" >> "$GITHUB_ENV"
       - name: Download builds
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: dist
           merge-multiple: true
